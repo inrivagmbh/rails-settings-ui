@@ -1,7 +1,7 @@
 class RailsSettingsUi::SettingsController < RailsSettingsUi::ApplicationController
   include RailsSettingsUi::SettingsHelper
-  before_action :collection
-  before_action :validate_settings, only: :update_all
+  before_filter :collection
+  before_filter :validate_settings, only: :update_all
 
   def index
   end
