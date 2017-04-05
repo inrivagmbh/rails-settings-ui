@@ -71,12 +71,7 @@ module RailsSettingsUi::SettingsHelper
   end
 
   def get_collection_method
-    case Rails::VERSION::STRING
-    when /4\.0\.\d+/ || /3\..*/
-      :all
-    else
-      :get_all
-    end
+    :all
   end
 
   def default_value_for_setting(setting_name)
