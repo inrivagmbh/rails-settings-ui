@@ -1,9 +1,5 @@
-<div class="rails-settings">
-  <ol class="breadcrumb">
-    <li class="active">
-      <%= t('settings.index.title') %>
-    </li>
-  </ol>
+<p class="rails-settings">
+  <h1><%= t('settings.index.title') %></h1>
   <% if @casted_settings && @casted_settings[:errors].any? %>
     <div class="alert alert-danger">
       <%= t('settings.index.settings_include_errors') %>
@@ -31,6 +27,9 @@
         <tr data-name="<%= name %>">
           <td>
             <%= I18n.t("settings.attributes.#{name}.name") %>
+            <p class="help-block">
+              <%= I18n.t("settings.attributes.#{name}.help_block", default: '') %>
+            </p>
           </td>
           <td class="setting-value">
             <% setting_with_error = @casted_settings && @casted_settings[:errors].include?(name) %>

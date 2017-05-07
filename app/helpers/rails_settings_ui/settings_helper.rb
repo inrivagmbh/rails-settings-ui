@@ -28,8 +28,6 @@ module RailsSettingsUi::SettingsHelper
       default_options_from_locale
     end
     field = select_tag("settings[#{setting_name}]", options_for_select(default_options, selected_value), class: 'form-control')
-    help_block_content = I18n.t("settings.attributes.#{setting_name}.help_block", default: '')
-    field << content_tag(:span, help_block_content, class: 'help-block') if help_block_content.presence
     field.html_safe
   end
 
@@ -41,17 +39,13 @@ module RailsSettingsUi::SettingsHelper
       field << check_box_tag("settings[#{setting_name}][#{value}]", nil, checked, style: "margin: 0 10px;")
       field << label_tag("settings[#{setting_name}][#{value}]", I18n.t("settings.attributes.#{setting_name}.labels.#{value}", default: value.to_s), style: "display: inline-block;")
     end
-    help_block_content = I18n.t("settings.attributes.#{setting_name}.help_block", default: '')
-    field << content_tag(:span, help_block_content, class: 'help-block') if help_block_content.presence
     field.html_safe
   end
 
   def checkbox_field(setting_name, setting_value)
-    help_block_content = I18n.t("settings.attributes.#{setting_name}.help_block", default: '')
     fields = ""
     fields << hidden_field_tag("settings[#{setting_name}]", 'off').html_safe
-    fields << check_box_tag("settings[#{setting_name}]", nil, setting_value).html_safe
-    fields << content_tag(:span, help_block_content, class: 'help-block') if help_block_content.presence
+    fields << check_box_tag("settings[#{setting_name}]", nil, setting_value, :class => 'check_box switch').html_safe
     fields.html_safe
   end
 
@@ -61,9 +55,7 @@ module RailsSettingsUi::SettingsHelper
             else
               text_field_tag("settings[#{setting_name}]", setting_value.to_s, options)
             end
-
-    help_block_content = I18n.t("settings.attributes.#{setting_name}.help_block", default: '')
-    field + (help_block_content.presence && content_tag(:span, help_block_content, class: 'help-block'))
+    field.html_safe
   end
 
   def message_for_default_value_missing
