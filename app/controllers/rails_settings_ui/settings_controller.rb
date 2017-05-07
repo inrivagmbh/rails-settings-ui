@@ -19,7 +19,7 @@ class RailsSettingsUi::SettingsController < RailsSettingsUi::ApplicationControll
   private
 
   def collection
-    all_settings_without_ignored = all_settings.reject{ |name, _description| RailsSettingsUi.ignored_settings.include?(name.to_sym) }
+    all_settings_without_ignored = all_settings#.reject{ |name, _description| RailsSettingsUi.ignored_settings.include?(name) }
     @settings = Hash[all_settings_without_ignored]
     @errors = {}
   end
